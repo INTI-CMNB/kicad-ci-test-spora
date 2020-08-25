@@ -1,0 +1,11 @@
+(module FIDUCIAL_65MIL (layer F.Cu)
+  (solder_mask_margin 3)
+  (fp_text reference FIDUCIAL_65MIL (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 0.6096 0.6096) (thickness 0.1524)))
+  )
+  (fp_text value VAL** (at 0 0) (layer F.SilkS) hide
+    (effects (font (size 0.6096 0.6096) (thickness 0.1524)))
+  )
+  (pad "" smd circle (at 0 0) (size 1.651 1.651) (layers F.Cu F.Mask)
+    (solder_mask_margin 0.8255) (clearance 1.0795))
+)

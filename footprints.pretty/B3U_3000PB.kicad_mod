@@ -1,0 +1,23 @@
+(module B3U_3000PB (layer F.Cu) (tedit 5818F2E1)
+  (descr "Plastic QFP, Micrel QFN44-24LD-LP-1")
+  (fp_text reference SW*** (at -0.0127 -1.2827) (layer F.SilkS) hide
+    (effects (font (size 0.39878 0.39878) (thickness 0.07874)))
+  )
+  (fp_text value U3B_1000PB (at -0.0635 1.5494) (layer F.SilkS) hide
+    (effects (font (size 0.39878 0.39878) (thickness 0.07874)))
+  )
+  (fp_line (start 2 -0.9652) (end 1.3335 -0.9652) (layer F.SilkS) (width 0.1))
+  (fp_line (start 2 0.9652) (end 1.3335 0.9652) (layer F.SilkS) (width 0.1))
+  (fp_line (start -2 0.9652) (end -1.3462 0.9652) (layer F.SilkS) (width 0.1))
+  (fp_line (start -2 -0.9652) (end -1.3208 -0.9652) (layer F.SilkS) (width 0.1))
+  (pad 1 smd rect (at -1.7 0) (size 0.8 1.7) (layers F.Cu F.Paste F.Mask)
+    (solder_mask_margin 0.07112))
+  (pad 2 smd rect (at 1.7 0) (size 0.8 1.7) (layers F.Cu F.Paste F.Mask)
+    (solder_mask_margin 0.07112))
+  (pad "" np_thru_hole circle (at 0 0) (size 0.75 0.75) (drill 0.75) (layers *.Cu *.Mask F.SilkS))
+  (model ${KIPRJMOD}/../modelos.3dshapes/B3U_3000PB.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 0.3937 0.3937 0.3937))
+    (rotate (xyz -90 0 0))
+  )
+)

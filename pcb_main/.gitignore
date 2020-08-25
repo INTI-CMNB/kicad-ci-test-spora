@@ -1,0 +1,7 @@
+*.bck
+*.bak
+*.dcm
+_autosave*
+*.net
+*.csv
+*-bak

@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name spora_prog-rescue)(type Legacy)(uri ${KIPRJMOD}/spora_prog-rescue.lib)(options "")(descr ""))
+)

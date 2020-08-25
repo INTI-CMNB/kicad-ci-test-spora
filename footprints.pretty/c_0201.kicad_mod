@@ -1,0 +1,18 @@
+(module c_0201 (layer F.Cu) (tedit 5873F9BE)
+  (fp_text reference REF** (at 0 -1.651) (layer F.SilkS) hide
+    (effects (font (size 0.7112 0.4572) (thickness 0.1143)))
+  )
+  (fp_text value c_0201 (at 0 -0.7) (layer F.Fab) hide
+    (effects (font (size 0.7112 0.4572) (thickness 0.1143)))
+  )
+  (fp_line (start 0 -0.15) (end 0 0.15) (layer F.SilkS) (width 0.1016))
+  (pad 1 smd rect (at -0.26 0) (size 0.28 0.3) (layers F.Cu F.Paste F.Mask)
+    (solder_mask_margin 0.07))
+  (pad 2 smd rect (at 0.26 0) (size 0.28 0.3) (layers F.Cu F.Paste F.Mask)
+    (solder_mask_margin 0.07))
+  (model ${KIPRJMOD}/../modelos.3dshapes/c_0201.wrl
+    (at (xyz 0 0 0))
+    (scale (xyz 0.3937 0.3937 0.3937))
+    (rotate (xyz 0 0 0))
+  )
+)
