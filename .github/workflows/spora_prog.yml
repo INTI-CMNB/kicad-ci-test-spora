@@ -1,0 +1,94 @@
+name: "KiCad CI/CD for Spora programmer"
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    paths:
+      - 'pcb_prog/*.sch'
+      - 'pcb_prog/*.kicad_pcb'
+      - 'pcb_prog/*.kibot.yaml'
+      - 'pcb_prog/Makefile'
+  pull_request:
+    paths:
+      - 'pcb_prog/*.sch'
+      - 'pcb_prog/*.kicad_pcb'
+      - 'pcb_prog/*.kibot.yaml'
+      - 'pcb_prog/Makefile'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  ERC:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run ERC
+      run: |
+        make -C pcb_prog erc
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v1
+      with:
+        name: ERC_Output
+        path: Fabrication
+
+  DRC:
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+    needs: ERC
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run DRC
+      run: |
+        make -C pcb_prog drc
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v1
+      with:
+        name: DRC_Output
+        path: Fabrication
+
+  FabSch:
+    name: Schematic fabrication files
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+    needs: ERC
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run schematic stuff
+      run: |
+        make -C pcb_prog sch_fab
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v1
+      with:
+        name: FabSch_Output
+        path: Fabrication
+
+  FabPCB:
+    name: PCB fabrication files
+    runs-on: ubuntu-latest
+    container: setsoft/kicad_auto:latest
+    needs: DRC
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Run PCB stuff
+      run: |
+        make -C pcb_prog pcb_fab
+
+    - name: Retrieve results
+      uses: actions/upload-artifact@v1
+      with:
+        name: FabPCB_Output
+        path: Fabrication
+
+
