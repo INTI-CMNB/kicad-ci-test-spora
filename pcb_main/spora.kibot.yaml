@@ -153,7 +153,6 @@ outputs:
       plot_footprint_values: true
       force_plot_invisible_refs_vals: false
       tent_vias: true
-      check_zone_fills: true
 
       # gerber options
       line_width: 0.1
