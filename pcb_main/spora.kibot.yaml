@@ -8,21 +8,21 @@ preflight:
   check_zone_fills: false
   ignore_unconnected: false
 
-outputs:
+global:
+  # We want the revision added to the names for this project
+  output: '%f-%i_%r.%x'
 
+
+outputs:
   - name: 'print_sch'
     comment: "Print schematic (PDF)"
     type: pdf_sch_print
     dir: .
-    options:
-      output: Schematic.pdf
 
   - name: 'print_front'
     comment: "Print F.Cu+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_Top.pdf
     layers:
       - layer: F.Cu
       - layer: Dwgs.User
@@ -31,8 +31,6 @@ outputs:
     comment: "Print B.Cu+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_Bottom.pdf
     layers:
       - layer: B.Cu
       - layer: Dwgs.User
@@ -41,8 +39,6 @@ outputs:
     comment: "Print GND+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_GND.pdf
     layers:
       - layer: GND
       - layer: Dwgs.User
@@ -51,8 +47,6 @@ outputs:
     comment: "Print Power_+3,3V+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_Power.pdf
     layers:
       - layer: Power_+3,3V
       - layer: Dwgs.User
@@ -61,8 +55,6 @@ outputs:
     comment: "Print Señal_1+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_S1.pdf
     layers:
       - layer: Señal_1
       - layer: Dwgs.User
@@ -71,8 +63,6 @@ outputs:
     comment: "Print Señal_2+Dwgs.User"
     type: pdf_pcb_print
     dir: .
-    options:
-      output_name: PCB_S2.pdf
     layers:
       - layer: Señal_2
       - layer: Dwgs.User
@@ -83,7 +73,6 @@ outputs:
     dir: BoM
     options:
       blacklist: 'DNF*'
-      name_format: '%f_%r_iBoM'
 
   - name: 'bom_html'
     comment: "Bill of Materials in HTML format"
