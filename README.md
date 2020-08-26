@@ -45,6 +45,8 @@ When a commit affects any of the schematics, PCBs or the associated Makefiles th
 
 The configuration for the workflows can be found here: [.github/workflows/](https://github.com/INTI-CMNB/kicad-ci-test-spora/tree/master/.github/workflows)
 
+To get the generated outputs you must enter in one of the workflows, [here is an example](https://github.com/INTI-CMNB/kicad-ci-test-spora/actions/runs/224517813).
+
 ## Original Spora README
 
 BUILD AWESOME WEARABLES
