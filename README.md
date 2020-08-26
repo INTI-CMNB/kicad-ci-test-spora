@@ -1,8 +1,8 @@
 # KiCad CI/CD test using Spora
 
-![KiCad CI/CD for Spora main board](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20main%20board/badge.svg)
-![KiCad CI/CD for Spora I/O](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20I/O/badge.svg)
-![KiCad CI/CD for Spora programmer](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20programmer/badge.svg)
+[![KiCad CI/CD for Spora main board](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20main%20board/badge.svg)](https://github.com/INTI-CMNB/kicad-ci-test-spora/actions?query=workflow%3A%22KiCad+CI%2FCD+for+Spora+main+board%22)
+[![KiCad CI/CD for Spora I/O](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20I/O/badge.svg)](https://github.com/INTI-CMNB/kicad-ci-test-spora/actions?query=workflow%3A%22KiCad+CI%2FCD+for+Spora+I%2FO%22)
+[![KiCad CI/CD for Spora programmer](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20programmer/badge.svg)](https://github.com/INTI-CMNB/kicad-ci-test-spora/actions?query=workflow%3A%22KiCad+CI%2FCD+for+Spora+programmer%22)
 
 This project is a demo of [CI/CD](https://en.wikipedia.org/wiki/Continuous_integration) for [KiCad](https://www.kicad-pcb.org/)
 
