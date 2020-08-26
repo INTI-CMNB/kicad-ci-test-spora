@@ -1,5 +1,9 @@
 # KiCad CI/CD test using Spora
 
+![KiCad CI/CD for Spora main board](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20main%20board/badge.svg)
+![KiCad CI/CD for Spora I/O](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20I/O/badge.svg)
+![KiCad CI/CD for Spora programmer](https://github.com/INTI-CMNB/kicad-ci-test-spora/workflows/KiCad%20CI/CD%20for%20Spora%20programmer/badge.svg)
+
 This project is a demo of [CI/CD](https://en.wikipedia.org/wiki/Continuous_integration) for [KiCad](https://www.kicad-pcb.org/)
 
 ## Objetive
@@ -12,12 +16,12 @@ Automate the following tasks:
 ## Tools used
 
 To automate the process here we use:
-* [Kiplot](https://github.com/INTI-CMNB/kiplot) to generate gerbers, drill and position files
+* [KiBot](https://github.com/INTI-CMNB/KiBot) to generate gerbers, drill, position files and BoMs (HTML, XLSX and CSV)
 * [kicad-automation-scripts](https://github.com/INTI-CMNB/kicad-automation-scripts) to run DRC/ERC, prints schematics and PCB
-* [KiBoM](https://github.com/INTI-CMNB/KiBoM) to generate HTML and CSV BoMs
 * [InteractiveHtmlBom](https://github.com/INTI-CMNB/InteractiveHtmlBom) to generate interactive HTML BoMs
+* [PcbDraw](https://github.com/INTI-CMNB/PcbDraw) to generate the PCB previews using different colors
 * Docker to integrate KiCad and all the tools in a single package suitable for CI/CD pipelines
-* GitLab CI/CD pipeline mechanism
+* GitHub CI/CD pipeline mechanism
 
 The docker image can be found [here](https://github.com/INTI-CMNB/kicad_auto)
 
@@ -30,18 +34,16 @@ As a testbed we are using the [Spora](https://github.com/INTI-CMNB/spora) projec
 
 ## What we test
 
-The pipeline we test here runs 6 jobs. Two jobs for each PCB. One to test the schematic and generate the associated files and another to test the PCB and generate the associated files.
+The pipeline we test here runs 3 workflows, one for each PCB. Each workflow runs 4 jobs:
 
-When a commit affects the any of the schematics, PCBs or the associated Makefiles the pipeline is started. The pipeline succeeds only when the 6 jobs finishes successfully.
+- ERC: Runs the Electrical Rules Check (schematic test).
+- Schematic fabrication files: Generates all the outputs related to the schematic. Runs only if the ERC was successful.
+- DRC: Runs the Design Rules Check (PCB test).
+- PCB fabrication files: Generates all the outputs related to the PCB. Runs only if the DRC was successful.
 
-An aditional stage collects all the generated stuff in one *artifact*.
+When a commit affects any of the schematics, PCBs or the associated Makefiles the workflow is started.
 
-When the repo is tagged using a tag with the format **vSEMANTIC_VERSION** the pipeline is started and an additional stage creates a release with the generated files. The associated entries in the *CHANGELOG.md* are used as the release text.
-
-The configuration for this pipeline can be found here: [.gitlab-ci.yml](https://gitlab.com/set-soft/kicad-ci-test-spora/-/blob/master/.gitlab-ci.yml)
-
-An example of automatically generated release can be found here [v1.0.0](https://gitlab.com/set-soft/kicad-ci-test-spora/-/releases/v1.0.0)
-[![pipeline status](https://gitlab.com/set-soft/kicad-ci-test-spora/badges/v1.0.0/pipeline.svg)](https://gitlab.com/set-soft/kicad-ci-test-spora/-/commits/v1.0.0)
+The configuration for the workflows can be found here: [.github/workflows/](https://github.com/INTI-CMNB/kicad-ci-test-spora/tree/master/.github/workflows)
 
 ## Original Spora README
 
