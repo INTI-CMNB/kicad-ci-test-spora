@@ -9,12 +9,14 @@ on:
       - 'pcb_prog/*.kicad_pcb'
       - 'pcb_prog/*.kibot.yaml'
       - 'pcb_prog/Makefile'
+      - '.github/workflows/spora_prog.yml'
   pull_request:
     paths:
       - 'pcb_prog/*.sch'
       - 'pcb_prog/*.kicad_pcb'
       - 'pcb_prog/*.kibot.yaml'
       - 'pcb_prog/Makefile'
+      - '.github/workflows/spora_prog.yml'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
