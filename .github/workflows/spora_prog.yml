@@ -69,10 +69,13 @@ jobs:
         make -C pcb_prog sch_fab
 
     - name: Retrieve results
+      if: ${{ always() }}
       uses: actions/upload-artifact@v1
       with:
         name: FabSch_Output
-        path: pcb_prog/Fabrication
+        path: |
+          pcb_prog/Fabrication
+          pcb_prog/kibot_error.log
 
   FabPCB:
     name: PCB fabrication files
@@ -88,9 +91,11 @@ jobs:
         make -C pcb_prog pcb_fab
 
     - name: Retrieve results
+      if: ${{ always() }}
       uses: actions/upload-artifact@v1
       with:
         name: FabPCB_Output
-        path: pcb_prog/Fabrication
-
+        path: |
+          pcb_prog/Fabrication
+          pcb_prog/kibot_error.log
 
