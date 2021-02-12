@@ -70,12 +70,13 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: FabSch_Output
         path: |
-          pcb_main/Fabrication
+          pcb_main/Fabrication/
           pcb_main/kibot_error.log
+        if-no-files-found: warn
 
   FabPCB:
     name: PCB fabrication files
@@ -92,11 +93,12 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: FabPCB_Output
         path: |
-          pcb_main/Fabrication
+          pcb_main/Fabrication/
           pcb_main/kibot_error.log
+        if-no-files-found: warn
 
 
