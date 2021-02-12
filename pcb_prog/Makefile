@@ -1,26 +1,32 @@
 #!/usr/bin/make
-
-.PHONY: erc drc sch_fab pcb_fab erc_and_fab drc_and_fab
+DEBUG=
+MAK=kibot.mak
+CONFIG=spora_prog.kibot.yaml
+SCH=spora_prog.sch
+PCB=spora_prog.kicad_pcb
+DEST=Fabrication
 
 all: erc_and_fab drc_and_fab
 
-DEBUG=
+$(MAK): $(CONFIG)
+	kibot -e $(SCH) -b $(PCB) -c $< -d $(DEST) -m $@
 
-erc:
-	kibot $(DEBUG) -d Fabrication -s run_drc -i
+erc: $(MAK)
+	$(MAKE) -f $(MAK) run_erc
 
-drc:
-	kibot $(DEBUG) -d Fabrication -s run_erc -i
+drc: $(MAK)
+	$(MAKE) -f $(MAK) run_drc
 
-sch_fab:
-	kibot $(DEBUG) -d Fabrication -s run_erc,run_drc  print_sch interactive_bom bom_html bom_xlsx bom_csv
+sch_fab: $(MAK)
+	$(MAKE) -f $(MAK) out_sch
 
-pcb_fab:
-	kibot $(DEBUG) -d Fabrication -s all print_front print_bottom gerbers excellon_drill gerber_drills position
+pcb_fab: $(MAK)
+	$(MAKE) -f $(MAK) out_pcb
 
-erc_and_fab:
-	kibot $(DEBUG) -d Fabrication -s run_drc  print_sch interactive_bom bom_html bom_xlsx bom_csv
+erc_and_fab: $(MAK)
+	$(MAKE) -f $(MAK) all_sch
 
-drc_and_fab:
-	kibot $(DEBUG) -d Fabrication -s run_erc print_front print_bottom gerbers excellon_drill gerber_drills position
+drc_and_fab: $(MAK)
+	$(MAKE) -f $(MAK) all_pcb
 
+.PHONY: erc drc sch_fab pcb_fab erc_and_fab drc_and_fab

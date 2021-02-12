@@ -12,6 +12,20 @@ global:
   # We want the revision added to the names for this project
   output: '%f-%i_%r.%x'
 
+import:
+  - ../configs/Elecrow.kibot.yaml
+  - ../configs/FusionPCB.kibot.yaml
+  - ../configs/JLCPCB.kibot.yaml
+  - ../configs/P-Ban.kibot.yaml
+  - ../configs/PCBWay.kibot.yaml
+
+filters:
+ - name: 'exclude_any'
+   type: 'generic'
+   comment: 'Exclude logos, testpoints, fiducials and power'
+   exclude_any:
+     - column: Reference
+       regex: '^(G|#|TP|F).*'
 
 outputs:
   - name: 'print_sch'
@@ -57,6 +71,7 @@ outputs:
     dir: .
     layers:
       - layer: Señal_1
+        suffix: S1_Cu
       - layer: Dwgs.User
 
   - name: 'print_s2'
@@ -65,6 +80,7 @@ outputs:
     dir: .
     layers:
       - layer: Señal_2
+        suffix: S2_Cu
       - layer: Dwgs.User
 
   - name: 'interactive_bom'
@@ -97,12 +113,10 @@ outputs:
         - field: Desc
           name: Descripción
         - 'Quantity Per PCB'
-      exclude_any:
-        - column: Reference
-          regex: '^(G|#|TP|F).*'
       group_fields:  ['digikey#', 'Part']
       normalize_values: true
       normalize_locale: true
+      exclude_filter: 'exclude_any'
       html:
         logo: '../images/inti.png'
         digikey_link: 'digikey#'

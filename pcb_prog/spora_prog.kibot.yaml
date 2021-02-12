@@ -8,8 +8,26 @@ preflight:
   check_zone_fills: false
   ignore_unconnected: false
 
-outputs:
+global:
+  # We want the revision added to the names for this project
+  output: '%f-%i_%r.%x'
 
+import:
+  - ../configs/Elecrow.kibot.yaml
+  - ../configs/FusionPCB.kibot.yaml
+  - ../configs/JLCPCB.kibot.yaml
+  - ../configs/P-Ban.kibot.yaml
+  - ../configs/PCBWay.kibot.yaml
+
+filters:
+ - name: 'exclude_any'
+   type: 'generic'
+   comment: 'Exclude logos, testpoints, fiducials and power'
+   exclude_any:
+     - column: Reference
+       regex: '^(G|#|TP|F).*'
+
+outputs:
   - name: 'print_sch'
     comment: "Print schematic (PDF)"
     type: pdf_sch_print
@@ -68,9 +86,7 @@ outputs:
         - field: Desc
           name: Descripción
         - 'Quantity Per PCB'
-      exclude_any:
-        - column: Reference
-          regex: '^(G|#|TP|F).*'
+      exclude_filter: 'exclude_any'
       group_fields:  ['digikey#', 'Part']
       normalize_values: true
       normalize_locale: true

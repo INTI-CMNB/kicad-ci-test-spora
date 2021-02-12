@@ -1,27 +1,32 @@
 #!/usr/bin/make
-
-.PHONY: erc drc sch_fab pcb_fab erc_and_fab drc_and_fab
-
 DEBUG=
+MAK=kibot.mak
+CONFIG=spora_io.kibot.yaml
+SCH=spora_io.sch
+PCB=spora_io.kicad_pcb
+DEST=Fabrication
 
 all: erc_and_fab drc_and_fab
 
-erc:
-	kibot $(DEBUG) -d Fabrication -s run_drc -i
+$(MAK): $(CONFIG)
+	kibot -e $(SCH) -b $(PCB) -c $< -d $(DEST) -m $@
 
-drc:
-	kibot $(DEBUG) -d Fabrication -s run_erc -i
+erc: $(MAK)
+	$(MAKE) -f $(MAK) run_erc
 
-sch_fab:
-	kibot $(DEBUG) -d Fabrication -s run_erc,run_drc  print_sch interactive_bom bom_html bom_xlsx bom_csv
+drc: $(MAK)
+	$(MAKE) -f $(MAK) run_drc
 
-pcb_fab:
-	kibot $(DEBUG) -d Fabrication -s all print_front print_bottom gerbers excellon_drill gerber_drills position
+sch_fab: $(MAK)
+	$(MAKE) -f $(MAK) out_sch
 
-erc_and_fab:
-	kibot $(DEBUG) -d Fabrication -s run_drc  print_sch interactive_bom bom_html bom_xlsx bom_csv
+pcb_fab: $(MAK)
+	$(MAKE) -f $(MAK) out_pcb
 
-drc_and_fab:
-	kibot $(DEBUG) -d Fabrication -s run_erc print_front print_bottom gerbers excellon_drill gerber_drills position
+erc_and_fab: $(MAK)
+	$(MAKE) -f $(MAK) all_sch
 
+drc_and_fab: $(MAK)
+	$(MAKE) -f $(MAK) all_pcb
 
+.PHONY: erc drc sch_fab pcb_fab erc_and_fab drc_and_fab

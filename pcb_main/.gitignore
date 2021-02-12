@@ -6,3 +6,4 @@ _autosave*
 *.csv
 *-bak
 Fabrication
+kibot_error.log
