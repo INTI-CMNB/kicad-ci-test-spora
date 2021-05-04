@@ -38,7 +38,7 @@ jobs:
       if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
-        name: Fabrication_Output
+        name: Fabrication_Prog
         path: |
           pcb_prog/Fabrication/
         if-no-files-found: warn
