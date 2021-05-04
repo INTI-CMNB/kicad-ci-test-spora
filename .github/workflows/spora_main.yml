@@ -20,85 +20,26 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  ERC:
+  Fabrication:
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
-
     steps:
     - uses: actions/checkout@v2
-
-    - name: Run ERC
-      run: |
-        make -C pcb_main erc
-
-    - name: Retrieve results
-      uses: actions/upload-artifact@v1
+    - uses: INTI-CMNB/KiBot@v1
       with:
-        name: ERC_Output
-        path: pcb_main/Fabrication
-
-  DRC:
-    runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
-    needs: ERC
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Run DRC
-      run: |
-        make -C pcb_main drc
-
-    - name: Retrieve results
-      uses: actions/upload-artifact@v1
-      with:
-        name: DRC_Output
-        path: pcb_main/Fabrication
-
-  FabSch:
-    name: Schematic fabrication files
-    runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
-    needs: ERC
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Run schematic stuff
-      run: |
-        make -C pcb_main sch_fab
-
+        # Required - kibot config file
+        config: pcb_main/spora.kibot.yaml
+        # optional - prefix to output defined in config
+        dir: pcb_main/Fabrication
+        # optional - schematic file
+        schema: 'pcb_main/spora.sch'
+        # optional - PCB design file
+        board: 'pcb_main/spora.kicad_pcb'
     - name: Retrieve results
       if: ${{ always() }}
       uses: actions/upload-artifact@v2
       with:
-        name: FabSch_Output
+        name: Fabrication_Output
         path: |
           pcb_main/Fabrication/
-          pcb_main/kibot_error.log
         if-no-files-found: warn
-
-  FabPCB:
-    name: PCB fabrication files
-    runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
-    needs: DRC
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Run PCB stuff
-      run: |
-        make -C pcb_main pcb_fab
-
-    - name: Retrieve results
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v2
-      with:
-        name: FabPCB_Output
-        path: |
-          pcb_main/Fabrication/
-          pcb_main/kibot_error.log
-        if-no-files-found: warn
-
 
