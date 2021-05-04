@@ -118,7 +118,7 @@ outputs:
       normalize_locale: true
       exclude_filter: 'exclude_any'
       html:
-        logo: '../images/inti.png'
+        logo: 'images/inti.png'
         digikey_link: 'digikey#'
         highlight_empty: false
 
@@ -130,7 +130,7 @@ outputs:
       <<: *bom_options
       format: XLSX
       xlsx:
-        logo: '../images/inti.png'
+        logo: 'images/inti.png'
         digikey_link: 'digikey#'
         highlight_empty: false
 
