@@ -45,8 +45,12 @@ outputs:
       metric_units: false
       minimal_header: true
       zeros_format: SUPPRESS_LEADING
-      left_digits: 3
-      right_digits: 3
+      # left_digits: 3
+      # right_digits: 3
+      # See https://github.com/INTI-CMNB/kicad-ci-test-spora/issues/1
+      # and https://docs.oshpark.com/design-tools/gerbv/fix-drill-format/
+      left_digits: 2
+      right_digits: 4
       pth_and_npth_single_file: false
       pth_id: ''
       npth_id: '-NPTH'
