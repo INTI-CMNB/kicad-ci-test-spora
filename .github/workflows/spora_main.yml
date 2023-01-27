@@ -23,8 +23,9 @@ jobs:
   Fabrication:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: INTI-CMNB/KiBot@v1
+    - uses: actions/checkout@v3
+    # This is a KiCad 5 example, KiCad 6 uses v2_k6
+    - uses: INTI-CMNB/KiBot@v2
       with:
         # Required - kibot config file
         config: pcb_main/spora.kibot.yaml
@@ -36,7 +37,7 @@ jobs:
         board: 'pcb_main/spora.kicad_pcb'
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Fabrication_Main
         path: |
