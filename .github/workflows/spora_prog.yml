@@ -22,35 +22,35 @@ on:
 jobs:
   ERC:
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
+    container: ghcr.io/inti-cmnb/kicad5_auto:latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Run ERC
       run: |
         make -C pcb_prog erc
 
     - name: Retrieve results
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: ERC_Output
         path: pcb_prog/Fabrication
 
   DRC:
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
+    container: ghcr.io/inti-cmnb/kicad5_auto:latest
     needs: ERC
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Run DRC
       run: |
         make -C pcb_prog drc
 
     - name: Retrieve results
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v3
       with:
         name: DRC_Output
         path: pcb_prog/Fabrication
@@ -58,11 +58,11 @@ jobs:
   FabSch:
     name: Schematic fabrication files
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
+    container: ghcr.io/inti-cmnb/kicad5_auto:latest
     needs: ERC
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Run schematic stuff
       run: |
@@ -70,7 +70,7 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: FabSch_Output
         path: |
@@ -81,11 +81,11 @@ jobs:
   FabPCB:
     name: PCB fabrication files
     runs-on: ubuntu-latest
-    container: setsoft/kicad_auto:latest
+    container: ghcr.io/inti-cmnb/kicad5_auto:latest
     needs: DRC
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Run PCB stuff
       run: |
@@ -93,11 +93,10 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: FabPCB_Output
         path: |
           pcb_prog/Fabrication/
           pcb_prog/kibot_error.log
         if-no-files-found: warn
-
