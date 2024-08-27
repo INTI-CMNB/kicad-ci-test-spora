@@ -1,4 +1,5 @@
 #!/usr/bin/make
+
 DEBUG=
 MAK=kibot.mak
 CONFIG=spora_io.kibot.yaml
