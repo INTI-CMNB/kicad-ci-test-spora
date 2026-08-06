@@ -29,14 +29,14 @@ jobs:
     container: ghcr.io/inti-cmnb/kicad5_auto:latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Run ERC
       run: |
         make -C pcb_prog erc
 
     - name: Retrieve results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: ERC_Output
         path: pcb_prog/Fabrication
@@ -47,14 +47,14 @@ jobs:
     needs: ERC
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Run DRC
       run: |
         make -C pcb_prog drc
 
     - name: Retrieve results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: DRC_Output
         path: pcb_prog/Fabrication
@@ -66,7 +66,7 @@ jobs:
     needs: ERC
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Run schematic stuff
       run: |
@@ -74,7 +74,7 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: FabSch_Output
         path: |
@@ -89,7 +89,7 @@ jobs:
     needs: DRC
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
 
     - name: Run PCB stuff
       run: |
@@ -97,7 +97,7 @@ jobs:
 
     - name: Retrieve results
       if: ${{ always() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: FabPCB_Output
         path: |
