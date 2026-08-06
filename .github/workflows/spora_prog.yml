@@ -17,6 +17,10 @@ on:
       - 'pcb_prog/*.kibot.yaml'
       - 'pcb_prog/Makefile'
       - '.github/workflows/spora_prog.yml'
+  schedule:
+    # Runs at 00:00 on day-of-month 1 every month
+    - cron: '0 0 1 * *' 
+  workflow_dispatch: # Manual triggering enabled for testing
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

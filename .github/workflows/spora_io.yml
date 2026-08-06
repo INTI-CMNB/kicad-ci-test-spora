@@ -1,7 +1,7 @@
 name: "KiCad CI/CD for Spora I/O"
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# events but only for the master branch.
 on:
   push:
     paths:
@@ -17,6 +17,11 @@ on:
       - 'pcb_io/*.kibot.yaml'
       - 'pcb_io/Makefile'
       - '.github/workflows/spora_io.yml'
+  schedule:
+    # Runs at 00:00 on day-of-month 1 every month
+    - cron: '0 0 1 * *' 
+  workflow_dispatch: # Manual triggering enabled for testing
+
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
